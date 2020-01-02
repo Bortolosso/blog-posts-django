@@ -1,0 +1,8 @@
+
+# --Folder containing all text editor extencions 
+.vscode
+
+*.pyc
+staticfiles
+.env
+db.sqlite3

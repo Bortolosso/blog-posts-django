@@ -1,0 +1,8 @@
+asgiref
+dataclasses
+Django
+django-crispy-forms
+gunicorn
+psycopg2
+pytz
+django-heroku
