@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block tittle %}
+Listagem de Posts
+{% endblock tittle %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Autor</th>
+        <th>Slug</th>
+        <th>Conteudo</th>
+        <th>Criado</th>   
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in post_list %}
+      <tr>
+        <td>{{post.tittle| safe}}</td>
+        <td>{{post.author| safe}}</td>
+        <td>{{post.slug| safe}}</td>
+        <td>{{post.content| safe}}</td>
+        <td>{{post.created_on| safe}}</td>
+        <td>
+            <a href="">Editar</a>
+            <a href="">Remover</a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <a href=""><button class="btn btn-primary">Cadastrar</button></a>
+
+  </div>
+
+</div>
+{% if is_paginated %}
+<nav aria-label="Page navigation conatiner"></nav>
+<ul class="pagination justify-content-center">
+  {% if page_obj.has_previous %}
+  <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Anterior </a></li>
+  {% endif %}
+  {% if page_obj.has_next %}
+  <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Proximo &raquo;</a></li>
+  {% endif %}
+</ul>
+</nav>
+</div>
+{% endif %}
+{%endblock%}

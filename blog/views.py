@@ -1,35 +1,17 @@
 from django.views import generic
-from .models import Post
-from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 
+from .models import Post
+from .forms import CommentForm, PostForm
+from .entities import posts
+from .services import post_service
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 4
-
-# def post_list(request):
-#     object_list = Post.objects.filter(status=1).order_by('-created_on')
-#     paginator = Paginator(object_list, 6)  # 6 posts in each page
-#     page = request.GET.get('page')
-#     try:
-#         post_list = paginator.page(page)
-#     except PageNotAnInteger:
-#             # If page is not an integer deliver the first page \ Se a página não for um número inteiro, entregue a primeira página 
-#         post_list = paginator.page(1)
-#     except EmptyPage:
-#         # If page is out of range deliver last page of results \ Se a página estiver fora do intervalo, entregue a última página de resultados
-#         post_list = paginator.page(paginator.num_pages)
-#     return render(request,
-#                   'index.html',
-#                   {'page': page,
-#                    'post_list': post_list})
-
-# class PostDetail(generic.DetailView):
-#     model = Post
-#     template_name = 'post_detail.html'
 
 def post_detail(request, slug):
     template_name = 'post_detail.html'
@@ -56,3 +38,10 @@ def post_detail(request, slug):
         'new_comment': new_comment,
         'comment_form': comment_form
     })
+
+class PostListAll(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'posts/list_post.html'
+
+            
+            
