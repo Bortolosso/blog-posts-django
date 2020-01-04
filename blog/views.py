@@ -1,12 +1,14 @@
 from django.views import generic
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Post
-from .forms import CommentForm, PostForm
+from .forms import CommentForm
 from .entities import posts
-from .services import post_service
+from .services import post_service 
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -43,5 +45,20 @@ class PostListAll(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'posts/list_post.html'
 
-            
+def signup(request):
+    if request.method == 'POST':
+        user_form = UserCreationForm(request.POST)
+        if user_form.is_valid():
+            user_form.save()
+            username = user_form.cleaned_data.get('username')
+            raw_password = user_form.cleaned_data.get('password1')
+            user = authenticate(username = username, password = raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        user_form = UserCreationForm()
+    return render(request, 'singup.html', {
+        'user_form': user_form
+    })
+                   
             
