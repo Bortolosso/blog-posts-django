@@ -10,8 +10,6 @@ from django.utils.translation import gettext as _
 
 from .models import Post
 from .forms import CommentForm, UserForm, UserProfileInfoForm
-from .entities import posts
-from .services import post_service 
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
