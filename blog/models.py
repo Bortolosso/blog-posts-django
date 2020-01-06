@@ -42,7 +42,7 @@ class Comment(models.Model):
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
 
-    name_dica = models.CharField(max_length = 15)
+    nick_name = models.CharField(max_length = 12, unique= True, default= None)
 
     def __str__(self):
         return self.user.username

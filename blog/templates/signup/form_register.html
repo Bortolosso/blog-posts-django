@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,64 +19,96 @@
 <body>
 {% block content %}
 
-{% load crispy_forms_tags %}
+{% if user_form.errors %}
+    {% for field in user_form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in user_form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
 
-    <div class="main">
+{% if profile_form.errors %}
+    {% for field in profile_form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in profile_form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+    <div class="main m-0 p-0">
         <!-- Sign up form -->
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
                     {% if registered %}
-                        <h1>Thank you for registering!</h1>
+                        <h1>REGISTRADO !</h1>
                     {% else %}
                         <h2 class="form-title">Registrar</h2>
                         <form enctype="multipart/form-data" method="POST" class="register-form" id="register-form">
-                            {% csrf_token %}
-                            {{ user_form.as_p }}
-                            {% comment %}
-                            {{ profile_form.as_p }}
-                            {% endcomment %}
-                            
-                            {% comment %}
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Nome"/>
+                                {% csrf_token %}
+                                {{ user_form.username }}
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Email"/>
+                                {% csrf_token %}
+                                {{ user_form.email }}
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Senha"/>
+                                {% csrf_token %}
+                                {{ user_form.password }}
                             </div>
-                             
+
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-puzzle-piece"></i></label>
+                                {% csrf_token %}
+                                {{ profile_form.nick_name }}
+                            </div>
+
+                            {% csrf_token %}
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Registrar"/>
+
+                            {% comment %}
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                 <input type="password" name="re_pass" id="re_pass" placeholder="Repita a Senha"/>
                             </div> 
                             
+
                             <div class="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>Eu aceito todos os requerimentos oferecidos pelo App <a href="#" class="term-service"> Termos de serviço</a></label>
                             </div>
                             {% endcomment %}
-                            <div class="form-group form-button">
-                                <input type="submit" name="signup" id="signup" class="form-submit" value="Registrar"/>
-                            </div>
                         </form>
+                    {% endif %}
                     </div>
+                    {% endblock %}
                     <div class="signup-image">
                         <figure><img src="{% static "images/logo_register.jpg" %}" alt="sing up image"></figure>
                         <a href="#" class="signup-image-link">Já tenho conta</a>
                     </div>
-                    {% endif %}
                 </div>
             </div>
         </section>
     </div>
-{% endblock content %}
 
     <!-- JS -->
     <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>

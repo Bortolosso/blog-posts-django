@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext as _
 
 from .models import Post
 from .forms import CommentForm, UserForm, UserProfileInfoForm
@@ -52,7 +53,7 @@ def index(request):
 
 @login_required
 def special(request):
-    return HttpResponse("You are logged in !")        
+    return HttpResponse_("You are logged in !")        
 
 @login_required
 def user_logout(request):
@@ -60,7 +61,7 @@ def user_logout(request):
     return HttpResponse(reverse('index'))
 
 def register(request):
-    template_name = 'signup/form_register_two.html'
+    template_name = 'signup/form_register.html'
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
@@ -88,7 +89,7 @@ def register(request):
                            
 
 def user_login(request):
-    template_name = 'signup/form_login_two.html'
+    template_name = 'signup/form_login.html'
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')

@@ -29,6 +29,6 @@ class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
         fields = (
-            'name_dica',
+            'nick_name',
         )
     
