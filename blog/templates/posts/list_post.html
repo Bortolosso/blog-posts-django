@@ -1,57 +1,68 @@
 {% extends "base.html" %}
 
-{% block tittle %}
-Listagem de Posts
-{% endblock tittle %}
-
 {% block content %}
 
 <div class="container">
   <div class="row">
 
+    {% comment %} 
     <table class="table">
-    <thead>
-      <tr>
-        <th>Titulo</th>
-        <th>Autor</th>
-        <th>Slug</th>
-        <th>Conteudo</th>
-        <th>Criado</th>   
-      </tr>
-    </thead>
-    <tbody>
-      {% for post in post_list %}
-      <tr>
-        <td>{{post.tittle| safe}}</td>
-        <td>{{post.author| safe}}</td>
-        <td>{{post.slug| safe}}</td>
-        <td>{{post.content| safe}}</td>
-        <td>{{post.created_on| safe}}</td>
-        <td>
-            <a href="">Editar</a>
-            <a href="">Remover</a>
-        </td>
-      </tr>
-      {% endfor %}
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Autor</th>
+          <th>Slug</th>
+          <th>Conteudo</th>
+          <th>Criado</th>   
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in post_list %}
+        <tr>
+          <td>{{post.tittle| safe}}</td>
+          <td>{{post.author| safe}}</td>
+          <td>{{post.slug| safe}}</td>
+          <td>{{post.content| safe}}</td>
+          <td>{{post.created_on| safe}}</td>
+          <td>
+              <a href="">Editar</a>
+              <a href="">Remover</a>
+          </td>
+        </tr>
+        {% endfor %}
       </tbody>
-    </table>
+    </table> 
+    {% endcomment %}
+    
+    <div class="col-md-8 mt-3 left">
+      {% for post in post_list %}
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-tittle">{{ post.tittle }}</h2>
+            <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}}  </p>
+            <p class="card-text">{{post.content | slice:":200" }}</p>
+            <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-primary">Ler mais... &rarr;</a>
+          </div>
+        </div>
+      {% endfor %}
 
-    <a href=""><button class="btn btn-primary">Cadastrar</button></a>
+      <a href=""><button class="btn btn-primary">Adicionar novo Post</button></a>
 
+    </div>
   </div>
+</div>
 
-</div>
 {% if is_paginated %}
-<nav aria-label="Page navigation conatiner"></nav>
-<ul class="pagination justify-content-center">
-  {% if page_obj.has_previous %}
-  <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Anterior </a></li>
-  {% endif %}
-  {% if page_obj.has_next %}
-  <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Proximo &raquo;</a></li>
-  {% endif %}
-</ul>
-</nav>
-</div>
+  <nav aria-label="Page navigation conatiner"></nav>
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Anterior </a></li>
+      {% endif %}
+      {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Proximo &raquo;</a></li>
+      {% endif %}
+    </ul>
+  </nav>
 {% endif %}
-{%endblock%}
+
+{% endblock %}
