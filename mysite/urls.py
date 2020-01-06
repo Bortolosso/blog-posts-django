@@ -20,6 +20,7 @@ from blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('i18n/', include('django.conf.urls.i18n')),
     url(r'^$',views.index,name='index'),
     url(r'^special/',views.special,name='special'),
     url(r'^blog/',include('blog.urls')),
