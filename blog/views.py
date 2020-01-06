@@ -15,7 +15,7 @@ from .services import post_service
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
-    paginate_by = 4
+    paginate_by = 10
 
 def post_detail(request, slug):
     template_name = 'post_detail.html'

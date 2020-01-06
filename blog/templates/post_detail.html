@@ -1,8 +1,10 @@
 {% extends 'base.html' %} {% block content %}
+
 {% load crispy_forms_tags %}
 
 <div class="container">
   <div class="row">
+  
     <div class="col-md-8 card mb-4  mt-3 left  top">
       <div class="card-body">
         <h1>{% block tittle %} {{ post.tittle }} {% endblock tittle %}</h1>
@@ -10,7 +12,6 @@
         <p class="card-text ">{{ post.content | safe }}</p>
       </div>
     </div>
-    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
 
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
@@ -35,6 +36,7 @@
         {% endfor %}
       </div>
     </div>
+
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
         {% if new_comment %}
@@ -51,6 +53,7 @@
         {% endif %}
       </div>
     </div>
+
   </div>
 </div>
 
