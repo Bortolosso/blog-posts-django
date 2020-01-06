@@ -38,3 +38,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.name)
+
+class UserProfileInfo(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+
+    name_dica = models.CharField(max_length = 15)
+
+    def __str__(self):
+        return self.user.username

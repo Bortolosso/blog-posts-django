@@ -1,10 +1,15 @@
-from .views import *
-from django.urls import include, path
+from blog import views
 from django.conf.urls import url
+from django.urls import path
+
+app_name = 'blog'
 
 urlpatterns = [
-    path('', PostList.as_view(), name='home'),
-    path('<slug:slug>/', post_detail, name='post_detail'),
-    path('list', PostListAll.as_view(), name='list_post'),
-    path(r'^sigup/$', signup, name='signup'),
+    path('', views.PostList.as_view(), name='home'),
+    path('slug', views.post_detail, name='post_detail'),
+    path('list', views.PostListAll.as_view(), name='list_post'),
+    # path('register', views.register, name='register'),
+    # path('user_login', views.user_login, name='user_login'), 
+    url(r'^register/$',views.register,name='register'),
+    url(r'^user_login/$',views.user_login,name='user_login'),
 ]

@@ -1,12 +1,14 @@
 from django.views import generic
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, UserForm, UserProfileInfoForm
 from .entities import posts
 from .services import post_service 
 
@@ -44,21 +46,63 @@ def post_detail(request, slug):
 class PostListAll(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'posts/list_post.html'
-
-def signup(request):
-    if request.method == 'POST':
-        user_form = UserCreationForm(request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            username = user_form.cleaned_data.get('username')
-            raw_password = user_form.cleaned_data.get('password1')
-            user = authenticate(username = username, password = raw_password)
-            login(request, user)
-            return redirect('home')
-    else:
-        user_form = UserCreationForm()
-    return render(request, 'singup.html', {
-        'user_form': user_form
-    })
                    
-            
+def index(request):
+    return render(request, 'index.html')
+
+@login_required
+def special(request):
+    return HttpResponse("You are logged in !")        
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponse(reverse('index'))
+
+def register(request):
+    template_name = 'signup/form_register_two.html'
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileInfoForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            #if 'profile_pic' in request.FILES:
+                #print('found it')
+                #profile.profile_pic = request.FILES['profile_pic']
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors,profile_form.errors)
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileInfoForm()
+    return render(request, template_name,
+                          {'user_form':user_form,
+                           'profile_form':profile_form,
+                           'registered':registered})
+                           
+
+def user_login(request):
+    template_name = 'signup/form_login_two.html'
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse('Your account was inactive.')
+        else:
+            print("Someone tried to login and failed.")
+            print("They used username: {} and password: {}".format(username,password))
+            return HttpResponse("Invalid login details given")
+    else:
+        return render(request, template_name, {})
+

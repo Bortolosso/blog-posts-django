@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, UserProfileInfo, User
 
 class PostAdmin(admin.ModelAdmin):
     list_display = (
@@ -51,3 +51,5 @@ class CommentAdmin(admin.ModelAdmin):
         queryset.update(active = True)
 
 admin.site.register(Post, PostAdmin)
+
+admin.site.register(UserProfileInfo)
