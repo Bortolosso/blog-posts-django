@@ -1,25 +1,42 @@
-{% extends "base.html" %}
 
-{% block content %}
+{% load static %}
 
-<header class="masthead">
-  <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class=" col-md-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <h3 class=" site-heading my-4 mt-3 text-white"> Bem vindo ao meu Blog</h3>
-            <p class="text-light"> Projeto de estudos ! &nbsp</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+          <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+          <meta name="google" content="translate" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+          <link rel="stylesheet" href="{% static "css/base.css" %}">
+    </head>
+  {% block content %}
+  <body>
+    {% if user.is_authenticated %}
+      <h2>Hello {{ user.username }}</h2>
+    
+
+    <header class="masthead">
+      <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+              <div class="site-heading">
+                <h3 class=" site-heading my-4 mt-3 text-white"> Bem vindo ao meu Blog</h3>
+                <p class="text-light"> Projeto de estudos ! &nbsp</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</header>
-
-<div class="col-md-8 mt-3 left">
-  <a href="{% url 'blog:list_post' %}" class="btn btn-primary">Ver Posts ...</a>
-<div>
-
-
+    </header>
+    <div class="col-md-8 mt-3 left">
+      <a href="{% url 'blog:list_post' %}" class="btn btn-primary">Ver Posts ...</a>
+    <div>
+    {% else %}
+      <h2>Register or Login if you'd like to</h2>
+    {% endif %}
+  </body>
+</html>
 {% endblock %}

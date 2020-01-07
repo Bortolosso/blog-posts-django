@@ -1,6 +1,8 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 
 {% load crispy_forms_tags %}
+
+{% block content %}
 
 <div class="container">
   <div class="row">
@@ -32,7 +34,6 @@
           </p>
           {{ comment.body | linebreaks }}
         </div>
-
         {% endfor %}
       </div>
     </div>
@@ -53,7 +54,6 @@
         {% endif %}
       </div>
     </div>
-
   </div>
 </div>
 

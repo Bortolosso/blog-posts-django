@@ -17,37 +17,37 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
 </head>
 <body>
-{% block content %}
+    {% block content %}
 
-{% if user_form.errors %}
-    {% for field in user_form %}
-        {% for error in field.errors %}
+    {% if user_form.errors %}
+        {% for field in user_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in user_form.non_field_errors %}
             <div class="alert alert-danger">
                 <strong>{{ error|escape }}</strong>
             </div>
         {% endfor %}
-    {% endfor %}
-    {% for error in user_form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
+    {% endif %}
 
-{% if profile_form.errors %}
-    {% for field in profile_form %}
-        {% for error in field.errors %}
+    {% if profile_form.errors %}
+        {% for field in profile_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in profile_form.non_field_errors %}
             <div class="alert alert-danger">
                 <strong>{{ error|escape }}</strong>
             </div>
         {% endfor %}
-    {% endfor %}
-    {% for error in profile_form.non_field_errors %}
-        <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
+    {% endif %}
 
     <div class="main m-0 p-0">
         <!-- Sign up form -->
@@ -57,6 +57,7 @@
                     <div class="signup-form">
                     {% if registered %}
                         <h1>REGISTRADO !</h1>
+                        {% extends 'index.html' %} 
                     {% else %}
                         <h2 class="form-title">Registrar</h2>
                         <form enctype="multipart/form-data" method="POST" class="register-form" id="register-form">
