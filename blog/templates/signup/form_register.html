@@ -103,7 +103,7 @@
                     {% endblock %}
                     <div class="signup-image">
                         <figure><img src="{% static "images/logo_register.jpg" %}" alt="sing up image"></figure>
-                        <a href="#" class="signup-image-link">Já tenho conta</a>
+                        <a href="{% url 'blog:login' %}" class="signup-image-link">Já tenho conta</a>
                     </div>
                 </div>
             </div>

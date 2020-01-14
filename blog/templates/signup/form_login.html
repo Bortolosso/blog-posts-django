@@ -29,7 +29,7 @@
 
                     <div class="signin-form">
                         <h2 class="form-title">Login</h2>
-                        <form method="POST" action="{% url 'blog:user_login' %}" class="register-form" id="login-form" >
+                        <form method="POST" action="{% url 'blog:login' %}" class="register-form" id="login-form" >
                             
                             <div class="form-group">
                                 {% csrf_token %}
@@ -66,9 +66,11 @@
             </div>
         </section>
     </div>
-{% endblock content %}
+
     <!-- JS -->
     <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
+
+{% endblock content %}

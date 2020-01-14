@@ -1,9 +1,7 @@
-from .models import Comment, UserProfileInfo
+from .models import Comment, UserProfileInfo, Post
 
 from django import forms
 from django.contrib.auth.models import User
-
-from .models import UserProfileInfo
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -31,4 +29,14 @@ class UserProfileInfoForm(forms.ModelForm):
         fields = (
             'nick_name',
         )
-    
+
+class UserPostForm(forms.ModelForm):
+    class Meta():
+        model = Post
+        fields = (
+            'tittle',
+            'slug',
+            'author',
+            'content',
+            'status'
+        )
