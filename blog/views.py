@@ -13,7 +13,7 @@ from .forms import CommentForm, UserForm, UserProfileInfoForm
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
-    template_name = 'index.html'
+    template_name = 'posts/form_post.html'
     paginate_by = 10
 
 def post_detail(request, slug):
@@ -51,12 +51,15 @@ def index(request):
 
 @login_required
 def special(request):
-    return HttpResponse_("You are logged in !")        
+    template_name = 'index.html'
+    return render(request, template_name)        
 
 @login_required
 def user_logout(request):
+    template_name = 'signup/form_login.html'
     logout(request)
-    return HttpResponse(reverse('index'))
+    logout_account = HttpResponse(reverse('index'))
+    return render(request, template_name)
 
 def register(request):
     template_name = 'signup/form_register.html'
