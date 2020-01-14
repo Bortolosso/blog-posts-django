@@ -13,7 +13,7 @@ from .forms import CommentForm, UserForm, UserProfileInfoForm
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
-    template_name = 'index.html'
+    template_name = 'posts/form_post.html'
     paginate_by = 10
 
 def post_detail(request, slug):
