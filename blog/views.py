@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 
 from .models import Post
-from .forms import CommentForm, UserForm, UserProfileInfoForm, UserPost
+from .forms import CommentForm, UserForm, UserProfileInfoForm, UserPostForm
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -19,11 +19,11 @@ class PostList(generic.ListView):
 def added_post(request):
   template_name = 'posts/form_post.html'
   if request.method == 'POST':
-    new_post = UserPost(data = request.POST)
+    new_post = UserPostForm(data = request.POST)
     if new_post.is_valid():
       new_post.save()
   else:
-    new_post = UserPost()
+    new_post = UserPostForm()
 
   return render(request, template_name, {
     'new_post': new_post

@@ -30,7 +30,7 @@ class UserProfileInfoForm(forms.ModelForm):
             'nick_name',
         )
 
-class UserPost(forms.ModelForm):
+class UserPostForm(forms.ModelForm):
     class Meta():
         model = Post
         fields = (
