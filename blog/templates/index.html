@@ -1,41 +1,131 @@
 
 {% load static %}
 
+{% block content %}
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Home</title>
-          <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-          <meta name="google" content="translate" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-          <link rel="stylesheet" href="{% static "css/base.css" %}">
-    </head>
-  {% block content %}
-  <body>
-    {% if user.is_authenticated %}
-      <h2>Hello {{ user.username }}</h2>
-    
 
-    <header class="masthead">
-      <div class="overlay"></div>
+    <title>Página Principal.</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="google" content="translate" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link href="{% static "css/freelancer.css" %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    {% if user.is_authenticated %}
+      <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="{% url 'blog:home' %}">Bem vindo {{ user.username }} ;)</a>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'logout' %}">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <header class="masthead bg-dark text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+          <p class="masthead-subheading font-weight-light mb-3">Eai {{ user.username }} vamos aproveitar ao maximo desse Blog, e abusar dele ? hehe</p>
+          <br>
+          <a href="{% url 'blog:list_post' %}" class="btn btn-danger">Ver Posts</a>
+          <br>
+          <a href="{% url 'blog:added_post' %}" class="btn btn-danger">Adicionar Post</a>
+        </div>
+      </header>
+
+      <footer class="footer text-center">
         <div class="container">
           <div class="row">
-            <div class=" col-md-8 col-md-10 mx-auto">
-              <div class="site-heading">
-                <h3 class=" site-heading my-4 mt-3 text-white"> Bem vindo ao meu Blog</h3>
-                <p class="text-light"> Projeto de estudos ! &nbsp</p>
-              </div>
+            <div class="col-lg-4 mb-5 mb-lg-0">
+            </div>
+
+            <div class="col-lg-4 mb-0 mb-lg-0">
+              <h4 class="text-uppercase mb-1">Sobre o Blog</h4>
+              <p class="lead mb-0">Esse projeto foi criado com o intuito de não haver restrições no conteudo dos Posts! Curta ao máximo hehe ;)</p>
+            </div>
+
+            <div class="col-lg-4">
             </div>
           </div>
         </div>
-      </div>
-    </header>
-    <div class="col-md-8 mt-3 left">
-      <a href="{% url 'blog:list_post' %}" class="btn btn-primary">Ver Posts ...</a>
-    <div>
+      </footer>
+
+      <section class="copyright py-1 text-center text-white">
+        <div class="container">
+            <p class="">Copyright &copy; SeuBlog :) <br> 2020</p>
+        </div>
+      </section>
+   
     {% else %}
-      <h2>Register or Login if you'd like to</h2>
+      <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="{% url 'blog:home' %}">Entre em sua conta ;)</a>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blog:login' %}">Login</a>
+              </li>
+              <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blog:register' %}">Registrar</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+          <h1 class="masthead-heading text-uppercase mb-0">Bem-Vindo !</h1>
+          <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="divider-custom-line"></div>
+          </div>
+          <p class="masthead-subheading font-weight-light mb-0">Faça sua conta para aproveitar ao máximo seu blog! Sem restrições ;)</p>
+        </div>
+      </header>
+
+      <footer class="footer text-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 mb-5 mb-lg-0">
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <h4 class="text-uppercase mb-4">Sobre o projeto</h4>
+              <p class="lead mb-0">Esse projeto foi criado com o intuito de não haver restrições de posts! Curta ao máximo hehe ;)</p>
+            </div>
+
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <section class="copyright py-4 text-center text-white">
+        <div class="container">
+            <p class="">Copyright &copy; SeuBlog :) <br> 2020</p>
+        </div>
+      </section>
+       
     {% endif %}
   </body>
 </html>
