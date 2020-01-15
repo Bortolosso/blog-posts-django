@@ -45,7 +45,8 @@ heroku login
 
 Added Heroku repository for running commands:
 ```
-heroku git:remote -a bortolosso-django-blog
+heroku git:remote -a prod-blog-web
+git remote add heroku git@heroku.com:prod-blog-web.git
 ```
 
 ## Authors 
