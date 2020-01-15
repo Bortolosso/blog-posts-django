@@ -6,4 +6,3 @@
 staticfiles
 .env
 db.sqlite3
-blog/migrations
