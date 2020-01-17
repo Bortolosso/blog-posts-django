@@ -43,7 +43,8 @@ def post_detail(request, slug):
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-            # Create Comment object but dont`t save to database yet \ Criar objeto de comentário, mas não salve no banco de dados ainda
+            # Create Comment object but dont`t save to database yet \ Criar objeto de comentário, mas não salve no
+            # banco de dados ainda
             new_comment = comment_form.save(commit=False)
             # Assign the current post to the comment \ Atribua a postagem atual ao comentário
             new_comment.post = post
@@ -95,9 +96,6 @@ def register(request):
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
-            # if 'profile_pic' in request.FILES:
-            # print('found it')
-            # profile.profile_pic = request.FILES['profile_pic']
             profile.save()
             registered = True
         else:
