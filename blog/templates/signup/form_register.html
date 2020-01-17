@@ -2,13 +2,12 @@
 
 {% load i18n %}
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registro</title>
+    <title>Registrar</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="{% static "fonts/material-icon/css/material-design-iconic-font.min.css" %}">
@@ -49,15 +48,15 @@
         {% endfor %}
     {% endif %}
 
+    {% if registered %}
+        <h1>REGISTRADO !</h1>
+    {% else %}
     <div class="main m-0 p-0">
         <!-- Sign up form -->
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
-                    {% if registered %}
-                        <h1>REGISTRADO !</h1>
-                    {% else %}
                         <h2 class="form-title">Registrar</h2>
                         <form enctype="multipart/form-data" method="POST" class="register-form" id="register-form">
                             <div class="form-group">
@@ -83,24 +82,21 @@
                             </div>
 
                             {% csrf_token %}
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Registrar"/>
+                            <input  type="submit" name="signup" id="signup" class="form-submit" value="Registrar">
 
                             {% comment %}
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                 <input type="password" name="re_pass" id="re_pass" placeholder="Repita a Senha"/>
-                            </div> 
-                            
-
+                            </div>
                             <div class="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>Eu aceito todos os requerimentos oferecidos pelo App <a href="#" class="term-service"> Termos de serviço</a></label>
                             </div>
                             {% endcomment %}
                         </form>
-                    {% endif %}
                     </div>
-                    {% endblock %}
+
                     <div class="signup-image">
                         <figure><img src="{% static "images/logo_register.jpg" %}" alt="sing up image"></figure>
                         <a href="{% url 'blog:login' %}" class="signup-image-link">Já tenho conta</a>
@@ -109,6 +105,9 @@
             </div>
         </section>
     </div>
+
+    {% endif %}
+    {% endblock %}
 
     <!-- JS -->
     <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>

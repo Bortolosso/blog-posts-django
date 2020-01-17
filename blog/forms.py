@@ -3,14 +3,14 @@ from .models import Comment, UserProfileInfo, Post
 from django import forms
 from django.contrib.auth.models import User
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = (
-            'name', 
-            'email', 
-            'body'
+            'body',
         )
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -23,6 +23,7 @@ class UserForm(forms.ModelForm):
             'email'
         )
 
+
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
@@ -30,13 +31,13 @@ class UserProfileInfoForm(forms.ModelForm):
             'nick_name',
         )
 
+
 class UserPostForm(forms.ModelForm):
     class Meta():
         model = Post
         fields = (
             'tittle',
             'slug',
-            'author',
             'content',
             'status'
         )

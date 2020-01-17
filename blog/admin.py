@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import Post, Comment, UserProfileInfo, User
 
+
 class PostAdmin(admin.ModelAdmin):
     list_display = (
-        'tittle', 
-        'slug', 
-        'status', 
+        'tittle',
+        'slug',
+        'status',
         'created_on'
     )
     list_filter = (
@@ -24,23 +25,21 @@ class PostAdmin(admin.ModelAdmin):
         'content',
     )
 
-@admin.register(Comment)
 
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
-        'name', 
-        'body', 
-        'post', 
-        'created_on', 
+        'body',
+        'post',
+        'created_on',
         'active'
     )
     list_filter = (
-        'active', 
+        'active',
         'created_on'
     )
     search_fields = (
-        'name', 
-        'email', 
+        'email',
         'body'
     )
     actions = [
@@ -48,7 +47,8 @@ class CommentAdmin(admin.ModelAdmin):
     ]
 
     def approve_comments(self, request, queryset):
-        queryset.update(active = True)
+        queryset.update(active=True)
+
 
 admin.site.register(Post, PostAdmin)
 
