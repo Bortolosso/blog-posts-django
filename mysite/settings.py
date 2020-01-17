@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
 
 
-# Quick-start development settings - unsuitable for production
+# Quick-starndt development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
