@@ -1,0 +1,270 @@
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Detahes do Post</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+
+</head>
+
+<body class="ss-bg-white">
+
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="top" class="s-wrap site-wrapper">
+
+        <header class="s-header header">
+
+            <div class="header__top">
+                <div class="header__logo">
+                    <a class="site-logo" href="{% url 'blog:home' %}">
+                        <img src="{% static 'images/logo.svg' %}" alt="Homepage">
+                    </a>
+                </div>
+
+                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
+
+            </div>
+
+            <nav class="header__nav-wrap">
+
+                <ul class="header__nav">
+                    <li><a href="{% url 'blog:home' %}" title="">Home</a></li>
+                    <li class="has-children current">
+                        <li class="has-children">
+                        <a href="#0" title="">Conta</a>
+                        <ul class="sub-menu">
+                          <li><a href="#">Perfil</a></li>
+                          <li><a href="#">Configurações</a></li>
+                          <li><a href="{% url 'logout' %}">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-children">
+                        <a href="#0" title="">Sobre</a>
+                        <ul class="sub-menu">
+                          <li><a href="#">Sobre o Blog</a></li>
+                          <li><a href="{% url 'blog:about_user' %}">Sobre Você</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" title="">Contato</a></li>
+                </ul> 
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="#0">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="#0">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="ss-instagram">
+                        <a href="#0">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav> 
+
+        </header> 
+        
+        <div class="s-content content">
+            <main class="row content__page">
+                
+                <article class="column large-full entry format-standard">
+
+                    <div class="content__page-header entry__header">
+                        <h2 class="display-1 entry__title">{% block tittle %} {{ post.tittle }} {% endblock tittle %}</h1>
+                        <ul class="entry__header-meta">
+                          <li class="author">By <a href="#0">{{ post.author }}</a></li>
+                          <li class="date">{{ post.created_on }}</li>
+                        </ul>
+                    </div> 
+
+                    <div class="entry__content">
+                      <p>{{ post.content | safe }}</p>
+                    </div>
+
+                </article> 
+                
+                <div class="comments-wrap">
+                    <div id="comments" class="column large-12">
+
+                        {% with comments.count as total_comments %}
+                        <h3 class="h2">{{ total_comments }} Comentarios</h3>
+                        {% endwith %} 
+                        
+                        <ol class="commentlist">
+
+                            {% for comment in comments %}
+                            <li class="depth-1 comment">
+                                <div class="comment__content">
+
+                                    {% comment "" %} Ajustar para injerir imagem de Perfil ao comentario
+                                    <div class="comment__avatar">
+                                        <img>
+                                    </div>
+                                    {% endcomment %}
+        
+                                    <div class="comment__info">
+                                        <div class="comment__author">User</div>
+        
+                                        <div class="comment__meta">
+                                            <div class="comment__time">{{ comment.created_on }}</div>
+                                            
+                                            <div class="comment__reply">
+                                                <a class="comment-reply-link" href="#0">Responder</a>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="comment__text">
+                                    <p>{{ comment.body | linebreaks }}</p>
+                                    </div>
+        
+                                </div>
+                            </li> 
+                            {% endfor %}
+
+                            {% comment "" %}
+                            <li class="thread-alt depth-1 comment">
+        
+                                <div class="comment__avatar">
+                                    <img class="avatar" src="{% static 'images/avatars/user-04.jpg' %}" alt="" width="50" height="50">
+                                </div>
+        
+                                <div class="comment__content">
+        
+                                    <div class="comment__info">
+                                        <div class="comment__author">Usuario</div>
+        
+                                        <div class="comment__meta">
+                                            <div class="comment__time">Janeiro 4, 2020</div>
+                                            <div class="comment__reply">
+                                                <a class="comment-reply-link" href="#0">Responder</a>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="comment__text">
+                                    <p>Conteudo.</p>
+                                    </div>
+        
+                                </div>
+        
+                                <ul class="children">
+        
+                                    <li class="depth-2 comment">
+        
+                                        <div class="comment__avatar">
+                                            <img class="avatar" src="{% static 'images/avatars/user-03.jpg' %}" alt="" width="50" height="50">
+                                        </div>
+        
+                                        <div class="comment__content">
+        
+                                            <div class="comment__info">
+                                                <div class="comment__author">User</div>
+        
+                                                <div class="comment__meta">
+                                                    <div class="comment__time">Janeiro 10, 2020</div>
+                                                </div>
+                                            </div>
+        
+                                            <div class="comment__text">
+                                                <p>Conteudo</p>
+                                            </div>
+        
+                                        </div>
+        
+                                        <ul class="children">
+        
+                                            <li class="depth-3 comment">
+        
+                                                <div class="comment__avatar">
+                                                    <img class="avatar" src="images/avatars/user-04.jpg" alt="" width="50" height="50">
+                                                </div>
+        
+                                                
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li> 
+                            {% endcomment %}
+
+                        </ol>
+
+                    </div> 
+
+                    <div class="column large-12 comment-respond">
+
+                        <div id="respond">
+            
+                            <h3 class="h2">Adicione um comentário ! <span></span></h3>
+            
+                            <form name="contactForm" id="contactForm" method="POST" action="" autocomplete="off">
+                                <fieldset>
+                                    <div class="form-field">
+                                        {% csrf_token %}
+                                        {{ comment_form | crispy }}
+                                    </div>
+                                    <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Comentar" type="submit">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div> 
+                </div>
+            </main>
+        </div> 
+
+        <footer class="s-footer footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                        <span>© Copyright Blog 2020</span> 
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
+            </div>
+        </footer>
+
+    </div> 
+
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+{% endblock content %}

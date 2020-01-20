@@ -22,9 +22,10 @@
         <h2>{{ total_comments }} Comentarios </h2>
 
         <p>
-          {% endwith %} {% for comment in comments %}
+          {% endwith %} 
         </p>
-
+        
+        {% for comment in comments %}
         <div class="comments" style="padding: 10px;">
           <p class="font-weight-bold">
             {{ comment.name }}
