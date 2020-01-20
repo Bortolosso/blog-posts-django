@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+
 from .models import Post
 from .forms import CommentForm, UserForm, UserProfileInfoForm, UserPostForm
 
@@ -13,6 +14,28 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 10
+
+
+class PostListAll(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'posts/list_post.html'
+
+
+def index(request):
+    template_name = 'page-about.html'
+    return render(request, template_name, {})
+
+
+@login_required
+def about(request):
+    template_name = 'page-about.html'
+    return render(request, template_name, {})
+
+
+@login_required
+def special(request):
+    template_name = 'index.html'
+    return render(request, template_name)
 
 
 @login_required
@@ -34,8 +57,8 @@ def added_post(request):
 
 
 def post_detail(request, slug):
-    template_name = 'post_detail.html'
-    paginate_by = 1
+    template_name = 'single-standard.html'
+    # paginate_by = 1
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(active=True)
     new_comment = None
@@ -59,21 +82,6 @@ def post_detail(request, slug):
         'new_comment': new_comment,
         'comment_form': comment_form
     })
-
-
-class PostListAll(generic.ListView):
-    queryset = Post.objects.filter(status=1).order_by('-created_on')
-    template_name = 'posts/list_post.html'
-
-
-def index(request):
-    return render(request, 'index.html')
-
-
-@login_required
-def special(request):
-    template_name = 'index.html'
-    return render(request, template_name)
 
 
 @login_required
@@ -123,7 +131,8 @@ def user_login(request):
                 return HttpResponse('Your account was inactive.')
         else:
             print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username, password))
+            print("They used username: {} and password: {}".format(
+                username, password))
             return HttpResponse("Invalid login details given")
     else:
         return render(request, template_name, {})

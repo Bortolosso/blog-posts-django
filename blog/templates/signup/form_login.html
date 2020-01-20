@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="{% static "images/logo_login.png" %}" alt="sing up image"></figure>
+                        <figure><img src="{% static "images/thumbs/masonry/gallery/logo_login.png" %}" alt="sing up image"></figure>
                         <a href="{% url 'blog:register' %}" class="signup-image-link">Criar conta</a>
                     </div>
 
@@ -41,16 +41,19 @@
                                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="password" id="your_pass" placeholder="Password"/>
                             </div>
+
                             {% comment %}
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Lembrar senha</label>
                             </div>
                             {% endcomment %}
+
                             <div class="form-group form-button">
-                                <input type="submit" name="signin" id="signin" class="form-submit" value="Login"/>
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Login "/>
                             </div>
                         </form>
+
                         {% comment %} Login Rede Social
                         <div class="social-login">
                             <span class="social-label">Or login with</span>
@@ -61,16 +64,17 @@
                             </ul> 
                         </div>
                         {% endcomment %}
+
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- JS -->
     <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</body>
 </html>
 
 {% endblock content %}

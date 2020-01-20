@@ -17,7 +17,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
+TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 
 
 # Quick-starndt development settings - unsuitable for production
@@ -83,16 +83,16 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-#Config SQLite Database
+# Config SQLite Database
 DATABASES = {
     "default": {
-        "ENGINE" : "django.db.backends.sqlite3",
+        "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "db.sqlite3")
     }
 }
 
 
-#Config PostgreSQL Database
+# Config PostgreSQL Database
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -137,11 +137,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-#Translate str
-LANGUAGES =[ ('en', _('English')), ('pt', _('Portuguese')),]
+# Translate str
+LANGUAGES = [('en', _('English')), ('pt', _('Portuguese')), ]
 
 
-#Locale path language translations
+# Locale path language translations
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )

@@ -4,129 +4,259 @@
 {% block content %}
 
 <!DOCTYPE html>
-<html>
-  <head>
-
-    <title>Página Principal.</title>
+<html class="no-js" lang="en">
+<head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Principal</title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="google" content="translate" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link href="{% static "css/freelancer.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/vendor.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
 
-  </head>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
 
-  <body>
+</head>
 
-    {% if user.is_authenticated %}
-      <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-        <div class="container">
-          <a class="navbar-brand js-scroll-trigger" href="{% url 'blog:home' %}">Bem vindo {{ user.username }} ;)</a>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'logout' %}">Sair</a>
-              </li>
-            </ul>
-          </div>
+<body>
+{% if user.is_authenticated %}
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-      </nav>
-      <header class="masthead bg-dark text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
-          <p class="masthead-subheading font-weight-light mb-3">Eai {{ user.username }} vamos aproveitar ao maximo desse Blog, e abusar dele ? hehe</p>
-          <br>
-          <a href="{% url 'blog:list_post' %}" class="btn btn-danger">Ver Posts</a>
-          <br>
-          <a href="{% url 'blog:added_post' %}" class="btn btn-danger">Adicionar Post</a>
-        </div>
-      </header>
+    </div>
 
-      <footer class="footer text-center">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 mb-5 mb-lg-0">
+    <div id="top" class="s-wrap site-wrapper">
+
+        <header class="s-header">
+
+            <div class="header__top">
+                <div class="header__logo">
+                    <a class="site-logo" href="{% url 'blog:home' %}">
+                        <img src="{% static "images/logo.svg" %}" alt="Homepage">
+                    </a>
+                </div>
+                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
+            </div> 
+
+            <nav class="header__nav-wrap">
+
+                <ul class="header__nav">
+                    <li class="current"><a href="{% url 'blog:home' %}" title="">Home</a></li>
+                    <li class="has-children">
+                        <a href="#0" title="">Conta</a>
+                        <ul class="sub-menu">
+                          <li><a href="#">Perfil</a></li>
+                          <li><a href="#">Configurações</a></li>
+                          <li><a href="{% url 'logout' %}">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-children">
+                        <a href="#0" title="">Sobre</a>
+                        <ul class="sub-menu">
+                          <li><a href="#">Sobre o Blog</a></li>
+                          <li><a href="{% url 'blog:about_user' %}">Sobre Você</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="page-contact.html" title="">Contato</a></li>
+                </ul>
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="#0">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="#0">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+                     <li class="ss-instagram">
+                        <a href="#0">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+        </header> 
+
+        <div class="s-content">
+            <div class="masonry-wrap">
+                <div class="masonry">
+                    <div class="grid-sizer"></div>
+
+                    {% comment "" %}
+                     <article class="masonry__brick entry format-quote animate-this">
+                        <div class="entry__thumb">
+                            <blockquote>
+                                <p>TEXTO DE OFERECIMENTO !</p>
+    
+                                <cite>AUTHOR</cite>
+                            </blockquote>
+                        </div>   
+                    </article> 
+                    {% endcomment %}  
+
+                    {% for post in post_list %}
+
+                    <article class="masonry__brick entry format-standard animate-this">
+
+                        {% comment "" %}
+                        IF HAVE IMAGE IN POST 
+                        <div class="entry__thumb">
+                            <a href="#" class="entry__thumb-link">
+                                <img src="{% static "images/thumbs/masonry/woodcraft-600.jpg" %}" 
+                                        srcset="{% static "images/thumbs/masonry/woodcraft-600.jpg 1x, images/thumbs/masonry/woodcraft-1200.jpg 2x" %}" alt="">
+                            </a>
+                        </div>
+                        {% endcomment %}   
+        
+                        <div class="entry__text">
+                            <div class="entry__header">
+    
+                                <h2 class="entry__title"><a href="{% url 'blog:post_detail' post.slug %}">{{ post.tittle }}</a></h2>
+                                <div class="entry__meta">
+                                    <span class="entry__meta-cat">
+                                        <a href="{% url 'blog:post_detail' post.slug %}">{{ post.author }}</a> 
+                                    </span>
+                                    <span class="entry__meta-date">
+                                        <a href="{% url 'blog:post_detail' post.slug %}">{{ post.created_on }}</a>
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <div class="entry__excerpt">
+                                <p>{{ post.content | slice:":200" }}</p>
+                            </div>
+                        </div>
+        
+                  </article> 
+
+                  {% endfor %}
+
+                </div> 
+            </div> 
+        </div> 
+        
+        <footer class="s-footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                        <span>© Copyright Blog 2019</span> 
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-lg-4 mb-0 mb-lg-0">
-              <h4 class="text-uppercase mb-1">Sobre o Blog</h4>
-              <p class="lead mb-0">Esse projeto foi criado com o intuito de não haver restrições no conteudo dos Posts! Curta ao máximo hehe ;)</p>
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
-
-            <div class="col-lg-4">
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <section class="copyright py-1 text-center text-white">
-        <div class="container">
-            <p class="">Copyright &copy; SeuBlog :) <br> 2020</p>
-        </div>
-      </section>
+        </footer>
+    </div>
    
-    {% else %}
-      <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-        <div class="container">
-          <a class="navbar-brand js-scroll-trigger" href="{% url 'blog:home' %}">Entre em sua conta ;)</a>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blog:login' %}">Login</a>
-              </li>
-              <li class="nav-item mx-0 mx-lg-1">
-                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blog:register' %}">Registrar</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <header class="masthead bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
-          <h1 class="masthead-heading text-uppercase mb-0">Bem-Vindo !</h1>
-          <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon">
-              <i class="fas fa-star"></i>
-            </div>
-            <div class="divider-custom-line"></div>
-          </div>
-          <p class="masthead-subheading font-weight-light mb-0">Faça sua conta para aproveitar ao máximo seu blog! Sem restrições ;)</p>
-        </div>
-      </header>
+    <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "js/plugins.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
 
-      <footer class="footer text-center">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 mb-5 mb-lg-0">
+{% else %}
+
+    <div id="top" class="s-wrap site-wrapper">
+
+        <header class="s-header">
+            <div class="header__top">
+                <div class="header__logo">
+                    <a class="site-logo" href="{% url 'blog:home' %}">
+                        <img src="{% static "images/logo.svg" %}" alt="Homepage">
+                    </a>
+                </div>
+                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
+            </div> 
+
+            <nav class="header__nav-wrap">
+                <ul class="header__nav">
+                    <li class="current"><a href="{% url 'blog:home' %}" title="">Home</a></li>
+                    <li><a href="{% url 'blog:login' %}" title="">Entrar</a></li>
+                    <li><a href="{% url 'blog:register' %}" title="">Registrar</a></li>
+                    <li><a href="#" title="">Contato</a></li>
+                </ul> 
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="#0">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="#0">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="ss-instagram">
+                        <a href="#0">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header> 
+
+        <div class="s-content">
+            <div class="masonry-wrap">
+                <div class="masonry">
+                    <div class="grid-sizer"></div>
+    
+                    <article class="masonry__brick entry format-standard animate-this">
+                        <div class="entry__thumb">
+                            <a href="{% url 'blog:register' %}" class="entry__thumb-link">
+                                <img src="{% static "images/thumbs/masonry/gallery/register-logo.png" %}" srcset="{% static "images/thumbs/masonry/gallery/register-logo.png 1x, images/thumbs/masonry/gallery/register-logo.png 2x" %}" alt="">
+                            </a>
+                        </div>
+                    </article>
+    
+                    <article class="masonry__brick entry format-quote animate-this">
+                        <div class="entry__thumb">
+                            <blockquote>
+                                <p>Clique na imagem para criar sua conta e divirta-se ;)</p>
+    
+                                <cite><i>by: João Bortolosso</i></cite>
+                            </blockquote>
+                        </div>   
+                    </article> 
+                </div> 
+            </div> 
+        </div> 
+
+        <footer class="s-footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                        <span>© Copyright Blog 2019</span> 
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-lg-4 mb-5 mb-lg-0">
-              <h4 class="text-uppercase mb-4">Sobre o projeto</h4>
-              <p class="lead mb-0">Esse projeto foi criado com o intuito de não haver restrições de posts! Curta ao máximo hehe ;)</p>
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
+        </footer>
 
-            <div class="col-lg-4">
-            </div>
-          </div>
-        </div>
-      </footer>
+    </div>
+   
+    <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "js/plugins.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
 
-      <section class="copyright py-4 text-center text-white">
-        <div class="container">
-            <p class="">Copyright &copy; SeuBlog :) <br> 2020</p>
-        </div>
-      </section>
-       
-    {% endif %}
-  </body>
-</html>
+{% endif %}
+
+</body>
+
 {% endblock %}
