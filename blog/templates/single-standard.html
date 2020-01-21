@@ -58,8 +58,7 @@
                         <li class="has-children">
                         <a href="#0" title="">Conta</a>
                         <ul class="sub-menu">
-                          <li><a href="#">Perfil</a></li>
-                          <li><a href="#">Configurações</a></li>
+                          <li><a href="#{% url 'blog:profile_user' %}">Perfil</a></li>
                           <li><a href="{% url 'logout' %}">Sair</a></li>
                         </ul>
                     </li>
@@ -67,7 +66,6 @@
                         <a href="#0" title="">Sobre</a>
                         <ul class="sub-menu">
                           <li><a href="#">Sobre o Blog</a></li>
-                          <li><a href="{% url 'blog:about_user' %}">Sobre Você</a></li>
                         </ul>
                     </li>
                     <li><a href="#" title="">Contato</a></li>

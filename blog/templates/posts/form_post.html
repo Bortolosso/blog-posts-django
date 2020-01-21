@@ -1,22 +1,145 @@
-{% extends 'base.html' %} 
-
-{% load crispy_forms_tags %}
-
 {% load static %}
 
 {% block content %}
 
-<html>
-  <head>
-    <link rel="stylesheet" href="{% static "css/form_post.css" %}">
-  </head>
-  <body>
-    <form method="post" style="margin-top: 1.3em;">
-      {{ new_post | crispy }}
-      {% csrf_token %}
-      <button type="submit" class="btn btn-primary  btn-lg"><a href="{% url 'blog:home' %}" title="">Mandar</a></button>
-    </form>
-  </body>
-</html>
+{% load crispy_forms_tags %}
 
-{% endblock content %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Sobre Usuário</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/vendor.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "favicon-16x16.png" %}">
+
+</head>
+
+<body class="ss-bg-white">
+{% if user.is_authenticated %}
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="top" class="s-wrap site-wrapper">
+
+        <header class="s-header header">
+
+            <div class="header__top">
+                <div class="header__logo">
+                    <a class="site-logo" href="{% url 'blog:home' %}">
+                        <img src="{% static "images/logo.svg" %}" alt="Homepage">
+                    </a>
+                </div>
+                
+                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
+
+            </div>
+
+            <nav class="header__nav-wrap">
+
+                <ul class="header__nav">
+                    <li><a href="{% url 'blog:home' %}" title="">Home</a></li>
+                    <li class="current"><a href="{% url 'blog:added_post' %}" title="">Adicionar Post</a></li>
+                    <li class="has-children">
+                        <a href="#0" title="">Conta</a>
+                        <ul class="sub-menu">
+                          <li><a href="{% url 'blog:profile_user' %}">Perfil</a></li>
+                          <li><a href="{% url 'logout' %}">Sair</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-children" >
+                        <a href="#0" title="">Sobre</a>
+                        <ul class="sub-menu">
+                          <li><a href="#">Sobre o Blog</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" title="">Contato</a></li>
+                </ul>
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="#0">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="#0">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+                     <li class="ss-instagram">
+                        <a href="#0">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav> 
+
+        </header> 
+        
+        <div class="s-content content">
+            <main class="row content__page">
+                
+                <section class="column large-full entry format-standard">
+
+                    <div class="content__page-header">
+                        <h2 class="display-1">Adicione um Post ;)</h2>
+                         <hr>
+                        
+                    </div> 
+                    <form method="post" style="">
+                          {% csrf_token %}
+                          {{ new_post | crispy }}
+                          <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Comentar" type="submit">
+                    </form>
+                    <hr>
+                </section>
+            </main>
+        </div>
+
+        <footer class="s-footer footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                        <span>© Copyright Blog 2020</span> 
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
+            </div>
+        </footer>
+
+    </div> 
+    
+    <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "js/plugins.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+
+{% else %}
+
+<h1>NAO LOGADO !</h1>
+
+{% endif %}
+
+</body>
+
+{% endblock %}
