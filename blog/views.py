@@ -27,7 +27,7 @@ def index(request):
 
 
 @login_required
-def about(request):
+def profile(request):
     template_name = 'page-about.html'
     return render(request, template_name, {})
 
