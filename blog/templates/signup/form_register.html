@@ -2,8 +2,13 @@
 
 {% load i18n %}
 
+{% block content %}
+
+{% load crispy_forms_tags %}
+
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -15,47 +20,112 @@
 
 </head>
 <body>
-    {% block content %}
-
-    {% if user_form.errors %}
-        {% for field in user_form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in user_form.non_field_errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endif %}
-
-    {% if profile_form.errors %}
-        {% for field in profile_form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in profile_form.non_field_errors %}
-            <div class="alert alert-danger">
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endif %}
 
     {% if registered %}
-        <h1>REGISTRADO !</h1>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login</title>
+
+        <link rel="stylesheet" href="{% static "fonts/material-icon/css/material-design-iconic-font.min.css" %}">
+
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+
+    </head>
+
+    {% block login %}
+
+    <body>
+        <div class="main">
+            <section class="sign-in">
+                <div class="container">
+                    <div class="signin-content">
+                        <div class="signin-image">
+                            <figure><img src="{% static "images/thumbs/masonry/gallery/logo_login.png" %}" alt="sing up image"></figure>
+                            <a href="{% url 'blog:register' %}" class="signup-image-link">Criar conta</a>
+                        </div>
+
+                        <div class="signin-form">
+
+                            <h2 class="form-title">Login</h2>
+
+                            <form method="POST" action="{% url 'blog:login' %}" class="login-form" id="login-form" >
+                                
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                    <input type="text" name="username" id="your_name" placeholder="Nome"/>
+                                </div>
+                                
+                                <div class="form-group">
+                                    {% csrf_token %}
+                                    <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                    <input type="password" name="password" id="your_pass" placeholder="Senha"/>
+                                </div>
+
+                                {% comment %}
+                                <div class="form-group">
+                                    <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Lembrar senha</label>
+                                </div>
+                                {% endcomment %}
+
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Login "/>
+                                </div>
+                                
+                            </form>
+
+                            {% comment %} Login Rede Social
+                            <div class="social-login">
+                                <span class="social-label">Or login with</span>
+                                    <ul class="socials">
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                    <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                </ul> 
+                            </div>
+                            {% endcomment %}
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
+
+    </body>
+    </html>
+
+    {% endblock login %}
+
     {% else %}
+
     <div class="main m-0 p-0">
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
+
+                        {% if user_form.errors %} 
+                          {% for field in user_form %}
+                            {% for error in field.errors %}
+
+                              <div class="alert alert-danger" role="alert">{{ error|escape }}</div>
+                              
+                              {% endfor %}
+                          {% endfor %}
+                        {% endif %}
+
                         <h2 class="form-title">Registrar</h2>
+
                         <form method="POST" action="{% url 'blog:register' %}" class="register-form" id="register-form">
 
                             <div class="form-group">
@@ -76,11 +146,13 @@
                                 <input type="password" name="password" id="your_password" placeholder="Senha"/>
                             </div>
                         
+                            {% comment %}
                             <div class="form-group">
                                 {% csrf_token %}
                                 <label for="nick_name"><i class="zmdi zmdi-puzzle-piece"></i></label>
                                 <input type="nick_name" name="nick_name" id="your_nick" placeholder="Seu Apelido"/>
                             </div>
+                            {% endcomment %}
 
                             {% csrf_token %}
                             <input  type="submit" name="signup" id="signup" class="form-submit" value="Registrar">
@@ -95,6 +167,7 @@
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>Eu aceito todos os requerimentos oferecidos pelo App <a href="#" class="term-service"> Termos de serviço</a></label>
                             </div>
                             {% endcomment %}
+                            
                         </form>
                     </div>
 
@@ -102,6 +175,7 @@
                         <figure><img src="{% static "images/thumbs/masonry/gallery/logo_register.jpg" %}" alt="sing up image"></figure>
                         <a href="{% url 'blog:login' %}" class="signup-image-link">Já tenho conta</a>
                     </div>
+
                 </div>
             </div>
         </section>

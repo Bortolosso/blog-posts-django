@@ -1,5 +1,7 @@
 {% load static %}
 
+{% load i18n %}
+
 {% block content %}
 
 {% load crispy_forms_tags %}
@@ -62,6 +64,7 @@
                           <li><a href="{% url 'logout' %}">Sair</a></li>
                         </ul>
                     </li>
+
                     <li class="has-children" >
                         <a href="#0" title="">Sobre</a>
                         <ul class="sub-menu">
@@ -101,19 +104,44 @@
                     <div class="content__page-header">
                         <h2 class="display-1">Adicione um Post ;)</h2>
                          <hr>
+
+                        {% if new_post.errors %} 
+                          {% for field in new_post %}
+                            {% for error in field.errors %}
+
+                              <div class="alert alert-danger" role="alert">{{ error|escape }}</div>
+                              
+                            {% endfor %}
+                          {% endfor %}
+                        {% endif %}
                         
                     </div> 
                     <form method="post" style="">
-                          {% csrf_token %}
-                          {{ new_post | crispy }}
+
+                          <div class="form-field">
+
+                            {% csrf_token %}
+                            <input name="tittle" id="tittle" class="full-width" placeholder="Titulo(tittle)" value="" type="text">
+                            {% csrf_token %}
+                            <input name="slug" id="slug" class="full-width" placeholder="Dica(slug)" value="" type="text">
+                            {% csrf_token %}
+                            <input name="content" id="content" class="full-width" placeholder="Conteudo" value="" type="text">
+                            {% csrf_token %}
+                            {{ new_post.status }}
+
+                          </div>
+
                           <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Comentar" type="submit">
+
                     </form>
                     <hr>
                 </section>
+
             </main>
         </div>
 
         <footer class="s-footer footer">
+
             <div class="row">
                 <div class="column large-full footer__content">
                     <div class="footer__copyright">
@@ -126,6 +154,7 @@
             <div class="go-top">
                 <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
+
         </footer>
 
     </div> 
@@ -141,6 +170,7 @@
     <div id="top" class="s-wrap site-wrapper">
 
         <header class="s-header">
+
             <div class="header__top">
                 <div class="header__logo">
                     <a class="site-logo" href="{% url 'blog:home' %}">
@@ -151,6 +181,7 @@
             </div> 
 
             <nav class="header__nav-wrap">
+
                 <ul class="header__nav">
                     <li class="current"><a href="{% url 'blog:home' %}" title="">Home</a></li>
                     <li><a href="{% url 'blog:login' %}" title="">Entrar</a></li>
@@ -164,17 +195,20 @@
                             <span class="screen-reader-text">Facebook</span>
                         </a>
                     </li>
+
                     <li class="ss-twitter">
                         <a href="#0">
                             <span class="screen-reader-text">Twitter</span>
                         </a>
                     </li>
+
                     <li class="ss-instagram">
                         <a href="#0">
                             <span class="screen-reader-text">Instagram</span>
                         </a>
                     </li>
                 </ul>
+
             </nav>
         </header> 
 
@@ -200,11 +234,13 @@
                             </blockquote>
                         </div>   
                     </article> 
+
                 </div> 
             </div> 
         </div> 
 
         <footer class="s-footer">
+
             <div class="row">
                 <div class="column large-full footer__content">
                     <div class="footer__copyright">
@@ -217,6 +253,7 @@
             <div class="go-top">
                 <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
+            
         </footer>
 
     </div>

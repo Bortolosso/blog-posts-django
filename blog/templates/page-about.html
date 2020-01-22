@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -25,7 +26,9 @@
 </head>
 
 {% if user.is_authenticated %}
+
 <body class="ss-bg-white">
+
     <div id="preloader">
         <div id="loader" class="dots-fade">
             <div></div>
@@ -54,20 +57,23 @@
                 <ul class="header__nav">
                     <li><a href="{% url 'blog:home' %}" title="">Home</a></li>
                     <li class=""><a href="{% url 'blog:added_post' %}" title="">Adicionar Post</a></li>
-                    <li class="has-children">
+                    <li class="has-children current">
                         <a href="#0" title="">Conta</a>
                         <ul class="sub-menu">
                           <li><a href="{% url 'blog:profile_user' %}">Perfil</a></li>
                           <li><a href="{% url 'logout' %}">Sair</a></li>
                         </ul>
                     </li>
-                    <li class="has-children current" >
+
+                    <li class="has-children " >
                         <a href="#0" title="">Sobre</a>
                         <ul class="sub-menu">
                           <li><a href="#">Sobre o Blog</a></li>
                         </ul>
                     </li>
+
                     <li><a href="#" title="">Contato</a></li>
+
                 </ul>
 
                 <ul class="header__social">
@@ -76,11 +82,13 @@
                             <span class="screen-reader-text">Facebook</span>
                         </a>
                     </li>
+
                     <li class="ss-twitter">
                         <a href="#0">
                             <span class="screen-reader-text">Twitter</span>
                         </a>
                     </li>
+
                      <li class="ss-instagram">
                         <a href="#0">
                             <span class="screen-reader-text">Instagram</span>
@@ -101,45 +109,59 @@
                         <h2 class="display-1">
                         Eai, {{ user.username }}.
                         </h2>
+
+                        <br>
+                        <button type="button" class="btn btn-dark"><a href="{% url 'blog:home' %}">Ver Posts</a></button>
+                        <button type="button" class="btn btn-dark"><a href="{% url 'blog:added_post' %}">Criar Posts</a></button>
+
                     </div> 
-
-                    <p class="lead drop-cap">
                     
-                    </p>
-
-                    <p>
-                    Text.
-                    </p>
-
-                    <h2>TITTLE</h2>
-
-                    <p>
-                    Text.
+                    {% comment "" %}
+                    <h2>Editar Perfil</h2>
                     
                     <hr>
+                    
+                    <form name="contactForm" id="contactForm" method="POST" action="{% url 'blog:register' %}"  autocomplete="off">
 
                     <div class="row block-large-1-2 block-tab-full">
                         <div class="column">
-                            <h4>Tittle.</h4>
-                            <p>Text.</p>
+                          <div class="column large-12 comment-respond">
+                            <div id="respond">
+                              <fieldset>
+                                  <div class="form-field">
+                                    {% csrf_token %}
+                                    <input name="cWebsite" id="cWebsite" class="full-width" placeholder="{{ user.username }}" value="" type="text">
+                                  </div>
+                              </fieldset>
+                            </div>
+                          </div>
                         </div>
 
                         <div class="column">
-                            <h4>Tittle.</h4>
-                            <p>Text.</p>
+                          <div class="column large-12 comment-respond">
+                            <div id="respond">
+                              <fieldset>
+                                  <div class="form-field">
+                                    {% csrf_token %}
+                                    <input name="cWebsite" id="cWebsite" class="full-width" placeholder="{{ user.email }}" value="" type="text">
+                                  </div>
+                              </fieldset>
+                            </div>
+                          </div>
                         </div>
-                    </div>
 
+                      <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Alterar" type="submit">
+                      </form>  
+                      {% endcomment %}
+
+                    </div>
                 </section>
 
             </main>
+        </div> 
 
-        </div> <!-- end s-content -->
-
-
-        <!-- footer
-        ================================================== -->
         <footer class="s-footer footer">
+
             <div class="row">
                 <div class="column large-full footer__content">
                     <div class="footer__copyright">
@@ -152,13 +174,11 @@
             <div class="go-top">
                 <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
+
         </footer>
 
-    </div> <!-- end s-wrap -->
+    </div> 
 
-
-    <!-- Java Script
-    ================================================== -->
     <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
     <script src="{% static "js/plugins.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>
@@ -205,6 +225,7 @@
                     </li>
                 </ul>
             </nav>
+
         </header> 
 
         <div class="s-content">
@@ -222,18 +243,22 @@
     
                     <article class="masonry__brick entry format-quote animate-this">
                         <div class="entry__thumb">
+
                             <blockquote>
                                 <p>Clique na imagem para criar sua conta e divirta-se ;)</p>
     
                                 <cite><i>by: João Bortolosso</i></cite>
                             </blockquote>
+
                         </div>   
                     </article> 
+
                 </div> 
             </div> 
         </div> 
 
         <footer class="s-footer">
+
             <div class="row">
                 <div class="column large-full footer__content">
                     <div class="footer__copyright">
@@ -246,6 +271,7 @@
             <div class="go-top">
                 <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
+            
         </footer>
 
     </div>
