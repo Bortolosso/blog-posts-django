@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.PostList.as_view(), name='home'),
     path('list', views.PostListAll.as_view(), name='list_post'),
     path('profile-user', views.profile, name='profile_user'),
+    path('contact', views.page_contact, name='contact'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^addedpost/$', views.added_post, name='added_post'),

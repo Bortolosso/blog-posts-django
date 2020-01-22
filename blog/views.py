@@ -26,6 +26,11 @@ def index(request):
     return render(request, template_name, {})
 
 
+def page_contact(request):
+    template_name = 'page-contact.html'
+    return render(request, template_name, {})
+
+
 @login_required
 def profile(request):
     template_name = 'page-about.html'

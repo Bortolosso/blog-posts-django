@@ -41,17 +41,6 @@
 
         <header class="s-header header">
 
-            <div class="header__top">
-                <div class="header__logo">
-                    <a class="site-logo" href="{% url 'blog:home' %}">
-                        <img src="{% static "images/logo.svg" %}" alt="Homepage">
-                    </a>
-                </div>
-                
-                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
-
-            </div>
-
             <nav class="header__nav-wrap">
 
                 <ul class="header__nav">
@@ -65,13 +54,7 @@
                         </ul>
                     </li>
 
-                    <li class="has-children" >
-                        <a href="#0" title="">Sobre</a>
-                        <ul class="sub-menu">
-                          <li><a href="#">Sobre o Blog</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" title="">Contato</a></li>
+                    <li><a href="{% url 'blog:contact' %}" title="">Contato</a></li>
                 </ul>
 
                 <ul class="header__social">
@@ -171,22 +154,13 @@
 
         <header class="s-header">
 
-            <div class="header__top">
-                <div class="header__logo">
-                    <a class="site-logo" href="{% url 'blog:home' %}">
-                        <img src="{% static "images/logo.svg" %}" alt="Homepage">
-                    </a>
-                </div>
-                <a href="#0" class="header__menu-toggle"><span>Menu</span></a>
-            </div> 
-
             <nav class="header__nav-wrap">
 
                 <ul class="header__nav">
                     <li class="current"><a href="{% url 'blog:home' %}" title="">Home</a></li>
                     <li><a href="{% url 'blog:login' %}" title="">Entrar</a></li>
                     <li><a href="{% url 'blog:register' %}" title="">Registrar</a></li>
-                    <li><a href="#" title="">Contato</a></li>
+                    <li><a href="{% url 'blog:contact' %}" title="">Contato</a></li>
                 </ul> 
 
                 <ul class="header__social">
