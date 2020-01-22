@@ -21,7 +21,9 @@
 </head>
 
 <body>
+
 {% if user.is_authenticated %}
+
     <div id="preloader">
         <div id="loader" class="dots-fade">
             <div></div>
@@ -55,12 +57,14 @@
                           <li><a href="{% url 'logout' %}">Sair</a></li>
                         </ul>
                     </li>
+
                     <li class="has-children">
                         <a href="#0" title="">Sobre</a>
                         <ul class="sub-menu">
                           <li><a href="#">Sobre o Blog</a></li>
                         </ul>
                     </li>
+
                     <li><a href="#" title="">Contato</a></li>
                 </ul>
 
@@ -70,11 +74,13 @@
                             <span class="screen-reader-text">Facebook</span>
                         </a>
                     </li>
+
                     <li class="ss-twitter">
                         <a href="#0">
                             <span class="screen-reader-text">Twitter</span>
                         </a>
                     </li>
+
                      <li class="ss-instagram">
                         <a href="#0">
                             <span class="screen-reader-text">Instagram</span>
@@ -120,6 +126,7 @@
                             <div class="entry__header">
     
                                 <h2 class="entry__title"><a href="{% url 'blog:post_detail' post.slug %}">{{ post.tittle }}</a></h2>
+
                                 <div class="entry__meta">
                                     <span class="entry__meta-cat">
                                         <a href="{% url 'blog:post_detail' post.slug %}">{{ post.author }}</a> 
@@ -131,7 +138,9 @@
                                 
                             </div>
                             <div class="entry__excerpt">
+
                                 <p>{{ post.content | slice:":200" }}</p>
+
                             </div>
                         </div>
         
@@ -144,6 +153,7 @@
         </div> 
         
         <footer class="s-footer">
+
             <div class="row">
                 <div class="column large-full footer__content">
                     <div class="footer__copyright">
@@ -154,7 +164,9 @@
             </div>
                 <a class="smoothscroll" title="Back to Top" href="#top"></a>
             </div>
+
         </footer>
+
     </div>
    
     <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
@@ -166,6 +178,7 @@
     <div id="top" class="s-wrap site-wrapper">
 
         <header class="s-header">
+
             <div class="header__top">
                 <div class="header__logo">
                     <a class="site-logo" href="{% url 'blog:home' %}">
@@ -201,6 +214,7 @@
                     </li>
                 </ul>
             </nav>
+
         </header> 
 
         <div class="s-content">
@@ -211,25 +225,29 @@
                     <article class="masonry__brick entry format-standard animate-this">
                         <div class="entry__thumb">
                             <a href="{% url 'blog:register' %}" class="entry__thumb-link">
-                                <img src="{% static "images/thumbs/masonry/gallery/register-logo.png" %}" srcset="{% static "images/thumbs/masonry/gallery/register-logo.png 1x, images/thumbs/masonry/gallery/register-logo.png 2x" %}" alt="">
+                              <img src="{% static "images/thumbs/masonry/gallery/register-logo.png" %}" srcset="{% static "images/thumbs/masonry/gallery/register-logo.png 1x, images/thumbs/masonry/gallery/register-logo.png 2x" %}" alt="">
                             </a>
                         </div>
                     </article>
     
                     <article class="masonry__brick entry format-quote animate-this">
                         <div class="entry__thumb">
+
                             <blockquote>
                                 <p>Clique na imagem para criar sua conta e divirta-se ;)</p>
     
                                 <cite><i>by: João Bortolosso</i></cite>
                             </blockquote>
+
                         </div>   
                     </article> 
+
                 </div> 
             </div> 
         </div> 
 
         <footer class="s-footer">
+        
             <div class="row">
                 <div class="column large-full footer__content">
                     <div class="footer__copyright">

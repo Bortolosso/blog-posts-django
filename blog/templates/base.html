@@ -3,47 +3,63 @@
 <html>
 
     <head>
+
         <title>Home</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
         <meta name="google" content="notranslate" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static "css/base.css" %}">
+
     </head>
 
     <body>
+
     {% if user.is_authenticated %}
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
+
             <div class="container-fluid">
+
                 <a class="navbar-brand" href="{% url 'blog:home' %}">{{ user.username }}</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="{% url 'admin:index' %}">Admin</a>
                         </li>
+
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Sair</a>
                         </li>
+
                       {% else %}
+
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="{% url 'blog:login' %}">Login</a>
                         </li>
+
                       {% endif %}
+
                     </ul>
-                    
+            
                 </div>
             </div>
             
         </nav>
+
         {% block content %}
-        <!-- Content Goes here -->
+
         {% endblock content %}
-        <!-- Footer -->
+
         <footer class="py-3 bg-grey">
             <p class="m-0 text-dark text-center ">Copyright &copy; SeuBlog <br> 2020 </p>
         </footer>
+        
     </body>
 </html>

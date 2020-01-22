@@ -35,7 +35,9 @@
     {% endcomment %}
     
     <div class="col-md-8 mt-3 left">
+
       {% for post in post_list %}
+
         <div class="card mb-4">
           <div class="card-body">
             <h3 class="card-tittle">{{ post.tittle }}</h2>
@@ -44,6 +46,7 @@
             <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-primary">Ler mais... &rarr;</a>
           </div>
         </div>
+
       {% endfor %}
 
       <a href="{% url 'blog:added_post' %}"><button class="btn btn-primary">Adicionar Novo Post</button></a>
@@ -53,16 +56,22 @@
 </div>
 
 {% if is_paginated %}
+
   <nav aria-label="Page navigation conatiner"></nav>
     <ul class="pagination justify-content-center">
       {% if page_obj.has_previous %}
       <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Anterior </a></li>
+
       {% endif %}
+
       {% if page_obj.has_next %}
       <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Proximo &raquo;</a></li>
+      
       {% endif %}
+
     </ul>
   </nav>
+  
 {% endif %}
 
 {% endblock %}

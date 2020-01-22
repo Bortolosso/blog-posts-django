@@ -17,42 +17,64 @@
 
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
-        <!-- comments -->
+
         {% with comments.count as total_comments %}
+
         <h2>{{ total_comments }} Comentarios </h2>
 
         <p>
+
           {% endwith %} 
+
         </p>
         
         {% for comment in comments %}
+
         <div class="comments" style="padding: 10px;">
           <p class="font-weight-bold">
+          
             {{ comment.name }}
+
             <span class=" text-muted font-weight-normal">
+
               {{ comment.created_on }}
+
             </span>
           </p>
+
           {{ comment.body | linebreaks }}
+
         </div>
+
         {% endfor %}
+
       </div>
     </div>
 
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
+
         {% if new_comment %}
+
         <div class="alert alert-success" role="alert">
           Comente o que quiser !
         </div>
+
         {% else %}
+
         <h3>Deixe um comentário</h3>
-        <form method="post" style="margin-top: 1.3em;">
+
+        <form method="POST" style="margin-top: 1.3em;">
+
           {{ comment_form | crispy }}
           {% csrf_token %}
+
           <button type="submit" class="btn btn-primary  btn-lg">Mandar</button>
+
         </form>
+
         {% endif %}
+        
       </div>
     </div>
   </div>
