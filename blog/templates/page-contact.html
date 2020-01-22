@@ -1,0 +1,217 @@
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <title>Contact - Typerite</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/vendor.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+
+</head>
+
+<body class="ss-bg-white">
+    
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div id="top" class="s-wrap site-wrapper">
+
+        <header class="s-header header">
+
+            {% if user.is_authenticated %}
+            <nav class="header__nav-wrap">
+
+                <ul class="header__nav">
+                    <li><a href="{% url 'blog:home' %}" title="">Home</a></li>
+                    <li><a href="{% url 'blog:added_post' %}" title="">Adicionar Post</a></li>
+                    <li class="has-children">
+                        <a href="#0" title="">Conta</a>
+                        <ul class="sub-menu">
+                          <li><a href="{% url 'blog:profile_user' %}">Perfil</a></li>
+                          <li><a href="{% url 'logout' %}">Sair</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="current"><a href="{% url 'blog:contact' %}" title="">Contato</a></li>
+                </ul>
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="#0">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+
+                    <li class="ss-twitter">
+                        <a href="#0">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+
+                     <li class="ss-instagram">
+                        <a href="#0">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+            {% else %}
+            <nav class="header__nav-wrap">
+                <ul class="header__nav">
+                    <li><a href="{% url 'blog:home' %}" title="">Home</a></li>
+                    <li><a href="{% url 'blog:login' %}" title="">Entrar</a></li>
+                    <li><a href="{% url 'blog:register' %}" title="">Registrar</a></li>
+                    <li class="current"><a href="{% url 'blog:contact' %}" title="">Contato</a></li>
+                </ul> 
+
+                <ul class="header__social">
+                    <li class="ss-facebook">
+                        <a href="#0">
+                            <span class="screen-reader-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="ss-twitter">
+                        <a href="#0">
+                            <span class="screen-reader-text">Twitter</span>
+                        </a>
+                    </li>
+                    <li class="ss-instagram">
+                        <a href="#0">
+                            <span class="screen-reader-text">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            {% endif %}
+
+        </header>
+
+        <div class="s-content content">
+            <main class="row content__page">
+                
+                <section class="column large-full entry format-standard">
+
+                    <div class="content__page-header">
+                        <h1 class="display-1">
+                        Entrar em contato.
+                        </h1>
+                    </div> 
+
+                    <p>
+                    """ Sobre o Blog e sobre mim """
+                    </p>
+
+                    <div class="row">
+    
+                        <div class="column large-six tab-full">
+                            <h4>Contact Info</h4>
+    
+                            <p>João Bortolosso<br>
+                            bortolossojoao@gmail.com <br>
+                            Telefone: +55 11 98352-4103
+                            </p>
+    
+                        </div>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                    <h3 class="h2">Eai, {{ user.username }}, deixe seu feedback ! ;)</h3>
+        
+                    <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+                        <fieldset>
+    
+                            <div class="form-field">
+                                <input name="cName" id="cName" class="full-width" placeholder="Seu Nome" value="" type="text">
+                            </div>
+    
+                            <div class="form-field">
+                                <input name="cEmail" id="cEmail" class="full-width" placeholder="Seu Email" value="" type="text">
+                            </div>
+    
+                            <div class="form-field">
+                                <input name="cWebsite" id="cWebsite" class="full-width" placeholder="Contato" value="" type="text">
+                            </div>
+    
+                            <div class="message form-field">
+                                <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Seu Feedback"></textarea>
+                            </div>
+    
+                            <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Gravar Mensagem" type="submit">
+    
+                        </fieldset>
+                    </form>
+                    {% else %}
+                    <h3 class="h2">Eai, deixe seu feedback ! ;)</h3>
+        
+                    <form name="contactForm" id="contactForm" method="post" action="" autocomplete="off">
+                        <fieldset>
+    
+                            <div class="form-field">
+                                <input name="cName" id="cName" class="full-width" placeholder="Seu Nome" value="" type="text">
+                            </div>
+    
+                            <div class="form-field">
+                                <input name="cEmail" id="cEmail" class="full-width" placeholder="Seu Email" value="" type="text">
+                            </div>
+    
+                            <div class="form-field">
+                                <input name="cWebsite" id="cWebsite" class="full-width" placeholder="Contato" value="" type="text">
+                            </div>
+    
+                            <div class="message form-field">
+                                <textarea name="cMessage" id="cMessage" class="full-width" placeholder="Seu Feedback"></textarea>
+                            </div>
+    
+                            <input name="submit" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Gravar Mensagem" type="submit">
+    
+                        </fieldset>
+                    </form>
+                    {% endif %} 
+
+                </section>
+
+            </main>
+
+        </div> 
+
+        <footer class="s-footer footer">
+            <div class="row">
+                <div class="column large-full footer__content">
+                    <div class="footer__copyright">
+                        <span>© Copyright Typerite 2019</span> 
+                        <span>Design by <a href="https://www.styleshout.com/">StyleShout</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top"></a>
+            </div>
+        </footer>
+
+    </div> 
+
+    <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "js/plugins.js" %}"></script>
+    <script src="{% static "js/main.js" %}"></script>
+
+</body>
+
+{% endblock %}
